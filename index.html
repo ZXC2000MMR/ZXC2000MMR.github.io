@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dota2 Info</title>
+    <title>Dota2 Helper</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -15,9 +15,14 @@
             margin: 0;
             overflow: hidden;
         }
-        .page { display: none; height: calc(100vh - 70px); overflow-y: auto; }
+        /* Скролл страниц */
+        .page { display: none; height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 20px; }
         .page.active { display: block; }
+        
+        /* Иконки предметов */
         .item-icon { width: 42px; height: 32px; border-radius: 4px; object-fit: cover; border: 1px solid #2a2e38; }
+        
+        /* Активный пункт меню */
         .nav-item.active { color: #fff; }
         .hidden { display: none; }
     </style>
@@ -28,8 +33,8 @@
         <h1 class="text-2xl font-bold text-orange-500 mb-4">Главная</h1>
         
         <div class="flex gap-2 mb-4">
-            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Новости</button>
-            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Патч</button>
+            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm transition-all">Новости</button>
+            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38] transition-all">Патч</button>
         </div>
 
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
@@ -37,7 +42,7 @@
                 <p class="text-gray-500 text-sm italic">Загрузка новостей...</p>
             </div>
             <div id="home-patch-content" class="hidden">
-                <p class="text-gray-500 text-sm italic">Загрузка патча...</p>
+                <p class="text-gray-500 text-sm italic">Загрузка информации о патче...</p>
             </div>
         </div>
     </div>
@@ -82,7 +87,7 @@
         </div>
 
         <div class="mx-4">
-            <h3 class="text-gray-500 text-xs uppercase font-bold mb-3 tracking-widest">Предметы: Стартовые</h3>
+            <h3 class="text-gray-500 text-xs uppercase font-bold mb-3 tracking-widest">Стартовый закуп</h3>
             <div class="flex gap-2">
                 <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center w-20">
                     <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tango.png" class="item-icon">
@@ -99,14 +104,16 @@
     <div id="page-profile" class="page p-4">
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] mb-4">
             <div class="flex items-center gap-4">
-                <div id="user-avatar" class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center font-bold text-xl uppercase">?</div>
+                <div id="user-avatar" class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center font-bold text-xl uppercase shadow-lg">?</div>
                 <div>
                     <div id="user-name" class="font-bold text-white">Загрузка...</div>
                     <div id="user-username" class="text-gray-500 text-sm">@username</div>
                 </div>
             </div>
         </div>
-        <button onclick="tg.close()" class="w-full bg-red-900/20 text-red-500 py-3 rounded-lg border border-red-900/30 font-bold">Выйти из приложения</button>
+        <button onclick="tg.close()" class="w-full bg-red-900/20 text-red-500 py-3 rounded-lg border border-red-900/30 font-bold active:scale-95 transition-transform">
+            Выйти из приложения
+        </button>
     </div>
 
     <div class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center z-50">
@@ -137,19 +144,19 @@
         tg.ready();
         tg.expand();
 
-        // 1. ЗАГРУЗКА БАЗЫ ДАННЫХ
-        async function loadHomeData() {
+        // 1. Загрузка данных из базы (data.json)
+        async function loadAppData() {
             try {
                 const response = await fetch('data.json');
                 const data = await response.json();
                 document.getElementById('home-news-content').innerHTML = `<p class="text-gray-300 text-sm">${data.news}</p>`;
                 document.getElementById('home-patch-content').innerHTML = `<p class="text-gray-300 text-sm">${data.patch}</p>`;
-            } catch (error) {
-                console.error('Ошибка загрузки базы данных:', error);
+            } catch (e) {
+                console.error("Ошибка загрузки data.json");
             }
         }
 
-        // 2. ПЕРЕКЛЮЧЕНИЕ ТАБОВ НА ГЛАВНОЙ
+        // 2. Переключение вкладок на Главной
         function switchHomeTab(tab) {
             const newsBtn = document.getElementById('btn-home-news');
             const patchBtn = document.getElementById('btn-home-patch');
@@ -157,20 +164,20 @@
             const patchContent = document.getElementById('home-patch-content');
 
             if (tab === 'news') {
-                newsBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
-                patchBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
+                newsBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm transition-all";
+                patchBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38] transition-all";
                 newsContent.classList.remove('hidden');
                 patchContent.classList.add('hidden');
             } else {
-                patchBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
-                newsBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
+                patchBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm transition-all";
+                newsBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38] transition-all";
                 patchContent.classList.remove('hidden');
                 newsContent.classList.add('hidden');
             }
             tg.HapticFeedback.selectionChanged();
         }
 
-        // 3. ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+        // 3. Переключение страниц меню
         function showPage(pageId, navElement) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
@@ -184,7 +191,7 @@
             tg.HapticFeedback.impactOccurred('light');
         }
 
-        // 4. ДАННЫЕ ПРОФИЛЯ
+        // 4. Профиль пользователя
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
             document.getElementById('user-name').innerText = user.first_name || 'Герой';
@@ -192,8 +199,8 @@
             document.getElementById('user-avatar').innerText = (user.first_name || 'U')[0];
         }
 
-        // ЗАПУСК
-        loadHomeData();
+        // Запуск загрузки данных
+        loadAppData();
     </script>
 </body>
 </html>
