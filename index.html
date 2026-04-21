@@ -1,42 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZXC | D2Helper</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { color: var(--tg-theme-text-color); background: var(--tg-theme-bg-color); }
+        /* Шрифт как в Dota/приложении */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            /* Используем переменные TG темы для фона и текста */
+            background-color: var(--tg-theme-bg-color, #131418);
+            color: var(--tg-theme-text-color, #fff);
+            -webkit-user-select: none;
+            user-select: none;
+            overflow: hidden; /* Запрещаем скролл всего окна */
+        }
+        
+        /* Стили для скролла внутри блоков */
+        .content-scroll {
+            height: calc(100vh - 70px); /* Высота минус навигация */
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        /* Стиль активной вкладки */
+        .nav-item.active {
+            color: #fff;
+        }
+        .nav-item.active svg {
+            fill: #fff; /* Или color: #fff; если SVG currentColor */
+        }
+
+        /* Таланты (синие акценты из image_0.png) */
+        .talent-key { color: #5f80cc; font-weight: 500; }
+        .talent-value { color: #94a3b8; }
+        .talent-row { border-color: #2a2e38; }
+
+        /* Иконки предметов ( image_6.png) */
+        .item-icon { width: 42px; height: 32px; border-radius: 4px; object-fit: cover; border: 1px solid #2a2e38; }
     </style>
 </head>
-<body class="p-4 font-sans">
-    <div id="main" class="flex flex-col items-center gap-4">
-        <h1 class="text-xl font-bold">Dota Assistant</h1>
+<body class="p-0 m-0">
+
+    <button onclick="tg.close()" class="absolute top-3 left-3 z-50 text-gray-500 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+
+    <div class="content-scroll">
         
-        <div id="status-card" class="w-full bg-gray-800 p-4 rounded-xl border border-orange-500 shadow-lg">
-            <p class="text-sm text-gray-400">Статус сети OpenDota:</p>
-            <div id="api-status" class="text-green-500 font-mono">Проверка...</div>
+        <div class="bg-[#1a1c24] m-4 p-4 rounded-xl shadow-lg border border-[#2a2e38] flex items-center gap-4">
+            <img src="https://api.opendota.com/apps/dota2/images/dota_react/heroes/slark.png?" 
+                 alt="Slark" class="w-16 h-16 rounded-lg border-2 border-orange-500 shadow-md">
+            <div>
+                <h1 class="text-2xl font-black text-white">Slark</h1>
+                <p class="text-xs text-gray-400">Винрейт: <span class="text-green-400 font-bold">55.9%</span> • 21 174 игр</p>
+            </div>
         </div>
 
-        <button onclick="sendData()" class="w-full bg-orange-600 text-white font-bold py-3 rounded-lg active:scale-95 transition-transform">
-            Сообщить боту, что я зашел
-        </button>
+        <div class="flex gap-2 mx-4 mb-4">
+            <button class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg active:scale-95 transition-transform text-sm">Сборка</button>
+            <button class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Матчапы</button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 mx-4 mb-5 text-center text-xs">
+            <div class="bg-[#1a1c24] p-3 rounded-lg border-b-2 border-orange-500">
+                <div class="text-orange-500 font-bold">Керри</div>
+                <div class="text-gray-300">56.8%</div>
+            </div>
+            <div class="bg-[#1a1c24] p-3 rounded-lg text-gray-500">
+                <div>Мид</div>
+                <div>51.7%</div>
+            </div>
+            <div class="bg-[#1a1c24] p-3 rounded-lg text-gray-500">
+                <div>Оффлейн</div>
+                <div>53.8%</div>
+            </div>
+        </div>
+
+        <div class="mx-4 mb-6">
+            <h3 class="text-gray-500 text-xs uppercase tracking-wider font-bold mb-3">Таланты</h3>
+            <div class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] text-[13px]">
+                <div class="flex items-center justify-between p-3 talent-row border-b">
+20:49
+<span class="talent-key">+35 сек. действия Essence Shift</span>
+                    <span class="text-gray-600 font-bold">25</span>
+                    <span class="talent-value">+1.5 сек. действия Shadow Dance</span>
+                </div>
+                <div class="flex items-center justify-between p-3 talent-row border-b">
+                    <span class="talent-value">Shadow Dance даёт +100 к скорости атаки</span>
+                    <span class="text-gray-600 font-bold">20</span>
+                    <span class="talent-key">+1 к краже ловкости за эффект Essence Shift</span>
+                </div>
+                <div class="flex items-center justify-between p-3 talent-row border-b">
+                    <span class="talent-value">+30 здоровья в секунду от Shadow Dance</span>
+                    <span class="text-gray-600 font-bold">15</span>
+                    <span class="talent-key">+70 к урону от Dark Pact</span>
+                </div>
+                <div class="flex items-center justify-between p-3 talent-row">
+                    <span class="talent-key">+0.5 сек. действия Pounce</span>
+                    <span class="text-gray-600 font-bold">10</span>
+                    <span class="talent-value">-0.75 сек. перезарядки Dark Pact</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-4 mb-6">
+            <h3 class="text-gray-500 text-xs uppercase tracking-wider font-bold mb-3">Предметы: Стартовые</h3>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center gap-1.5 text-center">
+                    <img src="https://api.opendota.com/apps/dota2/images/dota_react/items/tango.png?" alt="Tango" class="item-icon">
+                    <span class="text-[11px] text-gray-300">Tango</span>
+                </div>
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center gap-1.5 text-center">
+                    <img src="https://api.opendota.com/apps/dota2/images/dota_react/items/quelling_blade.png?" alt="Quelling Blade" class="item-icon">
+                    <span class="text-[11px] text-gray-300">Quelling Blade</span>
+                </div>
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center gap-1.5 text-center">
+                    <img src="https://api.opendota.com/apps/dota2/images/dota_react/items/magic_stick.png?" alt="Magic Stick" class="item-icon">
+                    <span class="text-[11px] text-gray-300">Magic Stick</span>
+                </div>
+            </div>
+        </div>
+
+    </div> <div class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center px-2 z-50">
+        <div class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>ГЛАВНАЯ</span>
+        </div>
+        <div class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+            <span>КВИЗЫ</span>
+        </div>
+        <div class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+            <span>ДРАФТЕР</span>
+        </div>
+        <div class="nav-item active flex flex-col items-center gap-1 text-[10px]">
+20:49
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            <span class="font-bold">ГЕРОИ</span>
+        </div>
+        <div class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            <span>ПРОФИЛЬ</span>
+        </div>
     </div>
 
     <script>
+        // Инициализация TG WebApp
         const tg = window.Telegram.WebApp;
+        tg.ready();
         tg.expand(); // Развернуть на весь экран
-
-        // Пример получения данных из API
-        fetch('https://api.opendota.com/api/health')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('api-status').innerText = "Подключено (OK)";
-            });
-
-        function sendData() {
-            // Отправляет данные обратно боту и закрывает приложение
-            tg.sendData("Пользователь открыл помощника");
-        }
+        
+        // Устанавливаем цвет хедера (совместимо с темой)
+        tg.setHeaderColor('#131418'); 
     </script>
 </body>
 </html>
