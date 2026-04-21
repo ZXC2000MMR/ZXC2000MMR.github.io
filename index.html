@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZXC | D2Helper</title>
+    <title>Dota2 Info</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -15,106 +15,82 @@
             margin: 0;
             overflow: hidden;
         }
-        
-        /* Логика страниц */
         .page { display: none; height: calc(100vh - 70px); overflow-y: auto; }
         .page.active { display: block; }
-
-        /* Твои стили интерфейса */
-        .talent-key { color: #5f80cc; font-weight: 500; }
-        .talent-value { color: #94a3b8; }
-        .talent-row { border-color: #2a2e38; }
         .item-icon { width: 42px; height: 32px; border-radius: 4px; object-fit: cover; border: 1px solid #2a2e38; }
         .nav-item.active { color: #fff; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <div id="page-home" class="page p-4">
-    <h1 class="text-2xl font-bold text-orange-500 mb-4">Главная</h1>
-    
-    <div class="flex gap-2 mb-4">
-        <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Новости</button>
-        <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Патч</button>
-    </div>
-
-    <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
-        <div id="home-news-content">
-            <p class="text-gray-400 text-sm">Тут будут последние новости Dota 2.</p>
-        </div>
+    <div id="page-home" class="page p-4 active">
+        <h1 class="text-2xl font-bold text-orange-500 mb-4">Главная</h1>
         
-        <div id="home-patch-content" class="hidden">
-            <p class="text-gray-400 text-sm">Тут будет описание изменений патча.</p>
+        <div class="flex gap-2 mb-4">
+            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Новости</button>
+            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Патч</button>
+        </div>
+
+        <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
+            <div id="home-news-content">
+                <p class="text-gray-500 text-sm italic">Загрузка новостей...</p>
+            </div>
+            <div id="home-patch-content" class="hidden">
+                <p class="text-gray-500 text-sm italic">Загрузка патча...</p>
+            </div>
         </div>
     </div>
-</div>
 
     <div id="page-quizzes" class="page p-4">
         <h1 class="text-2xl font-bold mb-4">Квизы</h1>
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
-            <p class="text-gray-400">Проверь свои знания Доты здесь.</p>
+            <p class="text-gray-400 text-sm">Проверь свои знания Доты здесь.</p>
         </div>
     </div>
 
     <div id="page-drafter" class="page p-4">
         <h1 class="text-2xl font-bold mb-4 text-blue-400">Драфтер</h1>
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
-            <p class="text-gray-400">Инструмент для контрпиков (в разработке).</p>
+            <p class="text-gray-400 text-sm">Инструмент для контрпиков (в разработке).</p>
         </div>
     </div>
 
-    <div id="page-heroes" class="page active">
+    <div id="page-heroes" class="page">
         <div class="bg-[#1a1c24] m-4 p-4 rounded-xl shadow-lg border border-[#2a2e38] flex items-center gap-4">
-            <img src="https://api.opendota.com/apps/dota2/images/dota_react/heroes/slark.png?" class="w-16 h-16 rounded-lg border-2 border-orange-500 shadow-md">
+            <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/slark.png" class="w-16 h-16 rounded-lg border-2 border-orange-500">
             <div>
                 <h1 class="text-2xl font-black text-white">Slark</h1>
                 <p class="text-xs text-gray-400">Винрейт: <span class="text-green-400 font-bold">55.9%</span> • 21 174 игр</p>
             </div>
         </div>
 
-        <div class="flex gap-2 mx-4 mb-4">
-            <button class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Сборка</button>
-            <button class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Матчапы</button>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2 mx-4 mb-5 text-center text-xs">
-            <div class="bg-[#1a1c24] p-3 rounded-lg border-b-2 border-orange-500">
-                <div class="text-orange-500 font-bold">Керри</div>
-                <div class="text-gray-300">56.8%</div>
-            </div>
-            <div class="bg-[#1a1c24] p-3 rounded-lg text-gray-500 text-gray-500">Мид (51.7%)</div>
-            <div class="bg-[#1a1c24] p-3 rounded-lg text-gray-500 text-gray-500">Хард (53.8%)</div>
-        </div>
-
         <div class="mx-4 mb-6">
-            <h3 class="text-gray-500 text-xs uppercase tracking-wider font-bold mb-3">Таланты</h3>
-            <div class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] text-[13px]">
-                <div class="flex items-center justify-between p-3 talent-row border-b">
-                    <span class="talent-key">+35 сек. Essence Shift</span>
+            <h3 class="text-gray-500 text-xs uppercase font-bold mb-3">Таланты</h3>
+            <div class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] text-[13px] divide-y divide-[#2a2e38]">
+                <div class="flex items-center justify-between p-3">
+                    <span class="text-[#5f80cc]">+35 сек Essence Shift</span>
                     <span class="text-gray-600 font-bold text-base">25</span>
-                    <span class="talent-value">+1.5 сек. Shadow Dance</span>
+                    <span class="text-gray-400">+1.5 сек Shadow Dance</span>
                 </div>
-20:58
-
-
-<div class="flex items-center justify-between p-3 talent-row">
-                    <span class="talent-value">+30 HP/сек (S. Dance)</span>
+                <div class="flex items-center justify-between p-3">
+                    <span class="text-gray-400">+30 HP/сек</span>
                     <span class="text-gray-600 font-bold text-base">15</span>
-                    <span class="talent-key">+70 урона Dark Pact</span>
+                    <span class="text-[#5f80cc]">+70 урона Dark Pact</span>
                 </div>
             </div>
         </div>
 
-        <div class="mx-4 mb-20">
-            <h3 class="text-gray-500 text-xs uppercase tracking-wider font-bold mb-3">Предметы: Стартовые</h3>
-            <div class="grid grid-cols-3 gap-2">
-                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center gap-1">
-                    <img src="https://api.opendota.com/apps/dota2/images/dota_react/items/tango.png?" class="item-icon">
-                    <span class="text-[10px] text-gray-300">Tango</span>
+        <div class="mx-4">
+            <h3 class="text-gray-500 text-xs uppercase font-bold mb-3">Стартовые предметы</h3>
+            <div class="flex gap-2">
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center w-20">
+                    <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tango.png" class="item-icon">
+                    <span class="text-[10px] mt-1 text-gray-300">Tango</span>
                 </div>
-                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center gap-1">
-                    <img src="https://api.opendota.com/apps/dota2/images/dota_react/items/quelling_blade.png?" class="item-icon">
-                    <span class="text-[10px] text-gray-300">Quelling</span>
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] flex flex-col items-center w-20">
+                    <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/quelling_blade.png" class="item-icon">
+                    <span class="text-[10px] mt-1 text-gray-300">Quelling</span>
                 </div>
             </div>
         </div>
@@ -123,36 +99,35 @@
     <div id="page-profile" class="page p-4">
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] mb-4">
             <div class="flex items-center gap-4">
-                <div id="user-avatar" class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center font-bold text-xl">?</div>
+                <div id="user-avatar" class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center font-bold text-xl uppercase">?</div>
                 <div>
-                    <div id="user-name" class="font-bold">Загрузка...</div>
+                    <div id="user-name" class="font-bold text-white">Загрузка...</div>
                     <div id="user-username" class="text-gray-500 text-sm">@username</div>
                 </div>
             </div>
         </div>
-        <button onclick="tg.close()" class="w-full bg-red-900/30 text-red-500 py-3 rounded-lg border border-red-900/50">Выйти из приложения</button>
+        <button onclick="tg.close()" class="w-full bg-red-900/20 text-red-500 py-3 rounded-lg border border-red-900/30 font-bold">Выйти из приложения</button>
     </div>
 
-    <div class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center px-2 z-50">
-        <div onclick="showPage('home', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+    <div class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center z-50">
+        <div onclick="showPage('home', this)" class="nav-item active flex flex-col items-center gap-1 text-white text-[10px] cursor-pointer">
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             <span>ГЛАВНАЯ</span>
         </div>
-        <div onclick="showPage('quizzes', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+        <div onclick="showPage('quizzes', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px] cursor-pointer">
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
             <span>КВИЗЫ</span>
         </div>
-        <div onclick="showPage('drafter', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
+        <div onclick="showPage('drafter', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px] cursor-pointer">
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
             <span>ДРАФТЕР</span>
         </div>
-        <div onclick="showPage('heroes', this)" class="nav-item active flex flex-col items-center gap-1 text-white text-[10px]">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+        <div onclick="showPage('heroes', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px] cursor-pointer">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             <span>ГЕРОИ</span>
         </div>
-        <div onclick="showPage('profile', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]">
-20:58
-<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        <div onclick="showPage('profile', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px] cursor-pointer">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
             <span>ПРОФИЛЬ</span>
         </div>
     </div>
@@ -162,56 +137,63 @@
         tg.ready();
         tg.expand();
 
+        // 1. ЗАГРУЗКА БАЗЫ ДАННЫХ
+        async function loadHomeData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                document.getElementById('home-news-content').innerHTML = `<p class="text-gray-300 text-sm">${data.news}</p>`;
+                document.getElementById('home-patch-content').innerHTML = `<p class="text-gray-300 text-sm">${data.patch}</p>`;
+            } catch (error) {
+                console.error('Ошибка загрузки базы данных:', error);
+            }
+        }
+
+        // 2. ПЕРЕКЛЮЧЕНИЕ ТАБОВ НА ГЛАВНОЙ
+        function switchHomeTab(tab) {
+            const newsBtn = document.getElementById('btn-home-news');
+            const patchBtn = document.getElementById('btn-home-patch');
+            const newsContent = document.getElementById('home-news-content');
+            const patchContent = document.getElementById('home-patch-content');
+
+            if (tab === 'news') {
+                newsBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
+                patchBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
+                newsContent.classList.remove('hidden');
+                patchContent.classList.add('hidden');
+            } else {
+                patchBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
+                newsBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
+                patchContent.classList.remove('hidden');
+                newsContent.classList.add('hidden');
+            }
+            tg.HapticFeedback.selectionChanged();
+        }
+
+        // 3. ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
         function showPage(pageId, navElement) {
-            // Скрываем все страницы
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // Показываем нужную
             document.getElementById('page-' + pageId).classList.add('active');
 
-            // Сбрасываем цвета кнопок
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active', 'text-white');
                 item.classList.add('text-gray-500');
             });
-            // Активируем текущую
             navElement.classList.add('active', 'text-white');
             navElement.classList.remove('text-gray-500');
-            
             tg.HapticFeedback.impactOccurred('light');
         }
 
-        // Заполнение данных профиля
+        // 4. ДАННЫЕ ПРОФИЛЯ
         if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
             const user = tg.initDataUnsafe.user;
-            document.getElementById('user-name').innerText = user.first_name;
+            document.getElementById('user-name').innerText = user.first_name || 'Герой';
             document.getElementById('user-username').innerText = user.username ? '@' + user.username : 'id' + user.id;
-            document.getElementById('user-avatar').innerText = user.first_name[0];
+            document.getElementById('user-avatar').innerText = (user.first_name || 'U')[0];
         }
-        function switchHomeTab(tab) {
-    const newsBtn = document.getElementById('btn-home-news');
-    const patchBtn = document.getElementById('btn-home-patch');
-    const newsContent = document.getElementById('home-news-content');
-    const patchContent = document.getElementById('home-patch-content');
 
-    if (tab === 'news') {
-        // Стиль кнопок: Новости активна
-        newsBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
-        patchBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
-        // Показ контента
-        newsContent.classList.remove('hidden');
-        patchContent.classList.add('hidden');
-    } else {
-        // Стиль кнопок: Патч активна
-        patchBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
-        newsBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
-        // Показ контента
-        patchContent.classList.remove('hidden');
-        newsContent.classList.add('hidden');
-    }
-    
-    // Вибрация кнопки (фишка Telegram)
-    tg.HapticFeedback.selectionChanged();
-}
+        // ЗАПУСК
+        loadHomeData();
     </script>
 </body>
 </html>
