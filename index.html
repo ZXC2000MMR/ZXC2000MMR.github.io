@@ -31,11 +31,23 @@
 <body>
 
     <div id="page-home" class="page p-4">
-        <h1 class="text-2xl font-bold text-orange-500 mb-4">Главная</h1>
-        <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
-            <p class="text-gray-400">Тут будут новости и мета патча.</p>
+    <h1 class="text-2xl font-bold text-orange-500 mb-4">Главная</h1>
+    
+    <div class="flex gap-2 mb-4">
+        <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Новости</button>
+        <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Патч</button>
+    </div>
+
+    <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
+        <div id="home-news-content">
+            <p class="text-gray-400 text-sm">Тут будут последние новости Dota 2.</p>
+        </div>
+        
+        <div id="home-patch-content" class="hidden">
+            <p class="text-gray-400 text-sm">Тут будет описание изменений патча.</p>
         </div>
     </div>
+</div>
 
     <div id="page-quizzes" class="page p-4">
         <h1 class="text-2xl font-bold mb-4">Квизы</h1>
@@ -175,6 +187,31 @@
             document.getElementById('user-username').innerText = user.username ? '@' + user.username : 'id' + user.id;
             document.getElementById('user-avatar').innerText = user.first_name[0];
         }
+        function switchHomeTab(tab) {
+    const newsBtn = document.getElementById('btn-home-news');
+    const patchBtn = document.getElementById('btn-home-patch');
+    const newsContent = document.getElementById('home-news-content');
+    const patchContent = document.getElementById('home-patch-content');
+
+    if (tab === 'news') {
+        // Стиль кнопок: Новости активна
+        newsBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
+        patchBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
+        // Показ контента
+        newsContent.classList.remove('hidden');
+        patchContent.classList.add('hidden');
+    } else {
+        // Стиль кнопок: Патч активна
+        patchBtn.className = "w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm";
+        newsBtn.className = "w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]";
+        // Показ контента
+        patchContent.classList.remove('hidden');
+        newsContent.classList.add('hidden');
+    }
+    
+    // Вибрация кнопки (фишка Telegram)
+    tg.HapticFeedback.selectionChanged();
+}
     </script>
 </body>
 </html>
