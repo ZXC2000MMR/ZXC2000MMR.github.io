@@ -1,4 +1,22 @@
 {
-  "news": "<b>🏆 События турнира PGL Wallachia Season 8</b><br><br>• Team Spirit выбила NAVI из турнира, несмотря на критику драфтов.<br>• Team Liquid успешно прошла в плей-офф, обыграв Heroic.<br>• Team Yandex — фаворит турнира, демонстрируя нереальный скилл.<br>• Virtus.pro и Tundra Esports покинули турнир.<br>• Aurora и BetBoom Team вышли в плей-офф.<br><br><b>📊 Таблица результатов (W - L):</b><br>Yandex: 0-3 | Tundra: 0-3<br>PAR: 3-1 | Spirit: 2-2<br>Xtreme: 2-2 | Liquid: 3-1<br>BB: 3-0 | Aurora: 3-0<br>Falcons: 3-1 | HEROIC: 2-2<br>MOUZ: 2-2 | Vici: 1-3<br>NAVI: 1-3 | Legion: 2-2<br>Virtus.pro: 1-3 | SA Rejects: 2-2",
-  "patch": "<b>🛠 Патч версия 7.41b</b><br><br><b>🚫 Удаление Граней:</b><br>Из игры полностью убрали механику «Граней».<br><br><b>🗺 Карта и цели:</b><br>Значительные изменения ландшафта и ключевых целей на карте.<br><br><b>⚔️ Новая экипировка:</b><br>• Добавлены: Shawl, Splintmail, Wizard Hat.<br>• Нейтральные: Forgager's Kit, Dagger of Ristul.<br>• Удалены: Whisper of the Dread.<br><br><b>🔄 Переработка предметов:</b><br>Полностью переработана механика Shivas Guard и Bloodstone."
+  "news": "<b>🏆 События турнира PGL Wallachia Season 8</b><br><br>Team Spirit выбила NAVI из турнира.<br>Team Liquid успешно прошла в плей-офф.<br>Team Yandex проявила себя как фаворит.<br>Virtus.pro проиграла Heroic и выбыла.<br>Tundra Esports уступила MOUZ и выбыла.<br>Aurora и BetBoom Team вышли в плей-офф.<br><br><b>📊 Таблица (W - L):</b><br>Yandex: 0 - 3<br>Tundra: 0 - 3<br>PAR: 3 - 1<br>Spirit: 2 - 2<br>Xtreme: 2 - 2<br>Liquid: 3 - 1<br>BB: 3 - 0<br>Aurora: 3 - 0<br>Falcons: 3 - 1<br>HEROIC: 2 - 2<br>MOUZ: 2 - 2<br>Vici: 1 - 3<br>Natus Vincere: 1 - 3<br>Legion: 2 - 2<br>Virtus.pro: 1 - 3<br>South America Rejects: 2 - 2",
+  "patch": "<b>🛠 Патч версия 7.41b</b><br><br><b>🚫 Удаление Граней:</b><br>Из игры полностью убрали механику «Граней».<br><br><b>🗺 Карта и цели:</b><br>Значительные изменения ландшафта и ключевых целей на карте.<br><br><b>⚔️ Новая экипировка:</b><br>• Добавлены: Shawl, Splintmail, Wizard Hat.<br>• Нейтральные: Forgager's Kit, Dagger of Ristul.<br>• Удалены: Whisper of the Dread.<br><br><b>🔄 Переработка предметов:</b><br>Полностью переработана механика Shivas Guard и Bloodstone.",
+  "heroes_data": {
+    "lion": {
+      "name": "Lion",
+      "image": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png",
+      "talents": [
+        { "lvl": "25", "left": "+600 к дальности Earth Spike", "right": "Hex по области" },
+        { "lvl": "20", "left": "Earth Spike в конусе 30°", "right": "+20 к урону Finger of Death" },
+        { "lvl": "15", "left": "+15% к эффектам предметов", "right": "-2.5 сек. перезарядки Hex" },
+        { "lvl": "10", "left": "+20 к скорости передвиж.", "right": "+10% к замедл. Mana Drain" }
+      ],
+      "items": [
+        { "name": "Tango", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tango.png" },
+        { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" },
+        { "name": "Tranquil", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tranquil_boots.png" },
+        { "name": "Mana Drain", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/arcane_boots.png" }
+      ]
+    }
+  }
 }
