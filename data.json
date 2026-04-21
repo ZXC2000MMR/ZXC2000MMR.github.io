@@ -1,29 +1,4 @@
 {
-  "news": "События с турнира PGL Wallachia Season 8
-Team Spirit выбила NAVI из турнира, несмотря на критику драфтов от экспертов.
-Team Liquid успешно прошла в плей-офф, обыграв Heroic.
-Team Yandex проявила себя как фаворит, демонстрируя индивидуальный скилл каждого игрока.
-Virtus.pro проиграла Heroic и не смогла пройти дальше, а Tundra Esports уступила MOUZ и также выбыла.
-Команды Aurora Gaming и BetBoom Team вышли в плей-офф, победив PARIVISION и Team Falcons соответственно.
-Пары четвертого раунда на вылет включают матч Team Spirit против Natus Vincere.
-
-Команды и W L
-Yandex 0 - 3
-Tundra Esports 0 - 3
-PAR 3 - 1
-Spirit 2 - 2
-Xtreme 2 - 2
-Liquid 3 - 1
-BB 3 - 0
-Aurora 3 - 0
-Falcons 3 - 1
-HEROIC 2 - 2 
-MOUZ 2 - 2
-Vici 1 - 3
-Natus Vincere 1 - 3
-Legion 2 - 2
-Virtus.pro 1 - 3
-South America Rejects 2 - 2
-.",
+  "news": "<b>🏆 События турнира PGL Wallachia Season 8</b><br><br>• Team Spirit выбила NAVI из турнира, несмотря на критику драфтов.<br>• Team Liquid успешно прошла в плей-офф, обыграв Heroic.<br>• Team Yandex — фаворит турнира, демонстрируя нереальный скилл.<br>• Virtus.pro и Tundra Esports покинули турнир.<br>• Aurora и BetBoom Team вышли в плей-офф.<br><br><b>📊 Таблица результатов (W - L):</b><br>Yandex: 0-3 | Tundra: 0-3<br>PAR: 3-1 | Spirit: 2-2<br>Xtreme: 2-2 | Liquid: 3-1<br>BB: 3-0 | Aurora: 3-0<br>Falcons: 3-1 | HEROIC: 2-2<br>MOUZ: 2-2 | Vici: 1-3<br>NAVI: 1-3 | Legion: 2-2<br>Virtus.pro: 1-3 | SA Rejects: 2-2",
   "patch": "В текущем мини-патче мы поправили отображение иконок и добавили вкладки на главную страницу."
 }
