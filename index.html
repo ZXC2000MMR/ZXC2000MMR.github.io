@@ -43,8 +43,8 @@
             <div onclick="openHeroDetails('lion')" class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] flex items-center gap-4 active:scale-95 transition-all">
                 <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png" class="w-12 h-12 rounded-lg border border-orange-500">
                 <div>
-                    <div class="font-bold text-lg">Lion</div>
-                    <div class="text-gray-500 text-xs text-orange-400">Смотреть билд</div>
+                    <div class="font-bold text-lg text-white">Lion</div>
+                    <div class="text-xs text-orange-400">Смотреть билд</div>
                 </div>
             </div>
         </div>
@@ -59,23 +59,19 @@
             </div>
             <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Таланты</h3>
             <div id="h-talents" class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] overflow-hidden mb-6"></div>
-            <div id="h-items-container"></div>
+            <div id="h-items-content"></div>
         </div>
     </div>
 
-    <div id="page-quizzes" class="page p-4"><h1>Квизы</h1></div>
-    <div id="page-drafter" class="page p-4"><h1>Драфтер</h1></div>
     <div id="page-profile" class="page p-4">
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
-            <p id="user-name" class="font-bold text-white text-xl mb-2"></p>
-            <button onclick="tg.close()" class="mt-4 w-full bg-red-900/20 text-red-500 py-2 rounded-lg">Выйти</button>
+            <p id="user-name" class="font-bold text-xl text-white mb-4 italic"></p>
+            <button onclick="tg.close()" class="w-full bg-red-900/20 text-red-500 py-3 rounded-lg font-bold">Выйти</button>
         </div>
     </div>
 
     <div class="fixed bottom-0 left-0 right-0 h-[70px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center z-50">
-        <div onclick="showPage('home', this)" class="nav-item active flex flex-col items-center gap-1 text-[10px]"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>ГЛАВНАЯ</span></div>
-        <div onclick="showPage('quizzes', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg><span>КВИЗЫ</span></div>
-        <div onclick="showPage('drafter', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg><span>ДРАФТЕР</span></div>
+        <div onclick="showPage('home', this)" class="nav-item active flex flex-col items-center gap-1 text-[10px] text-white"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>ГЛАВНАЯ</span></div>
         <div id="nav-heroes" onclick="showPage('heroes', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]"><svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span>ГЕРОИ</span></div>
         <div onclick="showPage('profile', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px]"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg><span>ПРОФИЛЬ</span></div>
     </div>
@@ -87,18 +83,19 @@
 
         async function init() {
             try {
-                const res = await fetch('data.json');
+                // Добавляем ?v= для сброса кэша при каждом запуске
+                const res = await fetch('data.json?v=' + Date.now());
                 db = await res.json();
                 document.getElementById('home-news-content').innerHTML = `<p class="text-gray-300 text-sm">${db.news}</p>`;
                 document.getElementById('home-patch-content').innerHTML = `<p class="text-gray-300 text-sm">${db.patch}</p>`;
-            } catch (e) { console.error("БД не найдена"); }
+            } catch (e) { console.error("Ошибка загрузки БД"); }
 
             // ОТОБРАЖЕНИЕ НИКА
             const user = tg.initDataUnsafe?.user;
             if (user) {
-                document.getElementById('user-name').innerText = user.first_name || user.username || "Игрок";
+                document.getElementById('user-name').innerText = user.first_name || user.username;
             } else {
-                document.getElementById('user-name').innerText = "Пользователь";
+                document.getElementById('user-name').innerText = "Игрок Dota 2";
             }
         }
 
@@ -130,10 +127,10 @@
                 </div>
             `).join('');
 
-            document.getElementById('h-items-container').innerHTML = `
-                <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest text-orange-500">Стартовый закуп</h3>
+            document.getElementById('h-items-content').innerHTML = `
+                <h3 class="text-orange-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Стартовый закуп</h3>
                 <div class="flex gap-2 overflow-x-auto pb-4 mb-4">${renderItems(h.starting_items)}</div>
-                <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest text-blue-400">Лейнинг / Основные</h3>
+                <h3 class="text-blue-400 text-[10px] uppercase font-bold mb-3 tracking-widest">Лейнинг / Основные</h3>
                 <div class="flex gap-2 overflow-x-auto pb-2">${renderItems(h.mid_items)}</div>
             `;
 
@@ -144,8 +141,14 @@
         function showPage(id, el) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + id).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.replace('text-white', 'text-gray-500'));
-            if (el) el.classList.replace('text-gray-500', 'text-white');
+            document.querySelectorAll('.nav-item').forEach(i => {
+                i.classList.remove('text-white');
+                i.classList.add('text-gray-500');
+            });
+            if (el) {
+                el.classList.remove('text-gray-500');
+                el.classList.add('text-white');
+            }
             tg.HapticFeedback.impactOccurred('light');
         }
 

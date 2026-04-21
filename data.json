@@ -19,11 +19,11 @@
         { "name": "Tranquil", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tranquil_boots.png" }
       ],
       "mid_items": [
+        { "name": "Dagon 5", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/dagon_5.png" },
+        { "name": "Ethereal", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ethereal_blade.png" },
         { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" },
         { "name": "Glimmer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/glimmer_cape.png" },
-        { "name": "Aghanim", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ultimate_scepter.png" },
-        { "name": "Dagon 5", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/dagon_5.png" },
-        { "name": "Ethereal", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ethereal_blade.png" }
+        { "name": "Aghanim", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ultimate_scepter.png" }
       ]
     }
   }
