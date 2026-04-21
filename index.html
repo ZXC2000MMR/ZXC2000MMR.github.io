@@ -14,7 +14,6 @@
         .nav-item.active { color: #fff; }
         .hidden { display: none; }
         
-        /* Стили для талантов */
         .talent-row { display: flex; align-items: center; justify-content: space-between; padding: 12px; gap: 10px; border-bottom: 1px solid #2a2e38; }
         .talent-lvl { 
             flex: none; width: 36px; height: 36px; border-radius: 50%; border: 2px solid #4a4e58;
@@ -54,17 +53,13 @@
     <div id="page-hero-details" class="page">
         <div class="p-4">
             <button onclick="showPage('heroes', document.getElementById('nav-heroes'))" class="text-orange-500 font-bold mb-4">← Назад</button>
-            
             <div class="flex items-center gap-4 mb-6">
                 <img id="h-img" src="" class="w-20 h-20 rounded-xl border-2 border-orange-500">
                 <h1 id="h-name" class="text-3xl font-black italic uppercase"></h1>
             </div>
-
             <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Таланты</h3>
             <div id="h-talents" class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] overflow-hidden mb-6"></div>
-
-            <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Стартовый закуп</h3>
-            <div id="h-items" class="flex gap-2 overflow-x-auto pb-2"></div>
+            <div id="h-items-container"></div>
         </div>
     </div>
 
@@ -72,7 +67,7 @@
     <div id="page-drafter" class="page p-4"><h1>Драфтер</h1></div>
     <div id="page-profile" class="page p-4">
         <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
-            <p id="user-name" class="font-bold"></p>
+            <p id="user-name" class="font-bold text-white text-xl mb-2"></p>
             <button onclick="tg.close()" class="mt-4 w-full bg-red-900/20 text-red-500 py-2 rounded-lg">Выйти</button>
         </div>
     </div>
@@ -97,6 +92,14 @@
                 document.getElementById('home-news-content').innerHTML = `<p class="text-gray-300 text-sm">${db.news}</p>`;
                 document.getElementById('home-patch-content').innerHTML = `<p class="text-gray-300 text-sm">${db.patch}</p>`;
             } catch (e) { console.error("БД не найдена"); }
+
+            // ОТОБРАЖЕНИЕ НИКА
+            const user = tg.initDataUnsafe?.user;
+            if (user) {
+                document.getElementById('user-name').innerText = user.first_name || user.username || "Игрок";
+            } else {
+                document.getElementById('user-name').innerText = "Пользователь";
+            }
         }
 
         function switchHomeTab(tab) {
@@ -119,12 +122,21 @@
                     <div class="talent-text text-gray-400 text-right">${t.right}</div>
                 </div>
             `).join('');
-            document.getElementById('h-items').innerHTML = h.items.map(i => `
+
+            const renderItems = (items) => items.map(i => `
                 <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] min-w-[75px] flex flex-col items-center">
                     <img src="${i.img}" class="w-10 h-8 rounded border border-gray-800">
-                    <span class="text-[9px] mt-1 text-gray-400">${i.name}</span>
+                    <span class="text-[9px] mt-1 text-gray-400 text-center">${i.name}</span>
                 </div>
             `).join('');
+
+            document.getElementById('h-items-container').innerHTML = `
+                <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest text-orange-500">Стартовый закуп</h3>
+                <div class="flex gap-2 overflow-x-auto pb-4 mb-4">${renderItems(h.starting_items)}</div>
+                <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest text-blue-400">Лейнинг / Основные</h3>
+                <div class="flex gap-2 overflow-x-auto pb-2">${renderItems(h.mid_items)}</div>
+            `;
+
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-hero-details').classList.add('active');
         }
@@ -133,7 +145,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + id).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.replace('text-white', 'text-gray-500'));
-            el.classList.replace('text-gray-500', 'text-white');
+            if (el) el.classList.replace('text-gray-500', 'text-white');
             tg.HapticFeedback.impactOccurred('light');
         }
 

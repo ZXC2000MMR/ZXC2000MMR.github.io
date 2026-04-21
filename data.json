@@ -11,11 +11,19 @@
         { "lvl": "15", "left": "+15% к эффектам предметов", "right": "-2.5 сек. перезарядки Hex" },
         { "lvl": "10", "left": "+20 к скорости передвиж.", "right": "+10% к замедл. Mana Drain" }
       ],
-      "items": [
-        { "name": "Tango", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tango.png" },
+      "starting_items": [
+        { "name": "Sentry", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ward_sentry.png" },
+        { "name": "Observer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ward_observer.png" },
+        { "name": "Grenade", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blood_grenade.png" },
+        { "name": "Stick", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/magic_stick.png" },
+        { "name": "Tranquil", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tranquil_boots.png" }
+      ],
+      "mid_items": [
         { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" },
-        { "name": "Tranquil", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tranquil_boots.png" },
-        { "name": "Mana Drain", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/arcane_boots.png" }
+        { "name": "Glimmer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/glimmer_cape.png" },
+        { "name": "Aghanim", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ultimate_scepter.png" },
+        { "name": "Dagon 5", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/dagon_5.png" },
+        { "name": "Ethereal", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ethereal_blade.png" }
       ]
     }
   }
