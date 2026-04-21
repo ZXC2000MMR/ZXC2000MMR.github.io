@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { color: var(--tg-theme-text-color); background: var(--tg-theme-bg-color); }
+    </style>
+</head>
+<body class="p-4 font-sans">
+    <div id="main" class="flex flex-col items-center gap-4">
+        <h1 class="text-xl font-bold">Dota Assistant</h1>
+        
+        <div id="status-card" class="w-full bg-gray-800 p-4 rounded-xl border border-orange-500 shadow-lg">
+            <p class="text-sm text-gray-400">Статус сети OpenDota:</p>
+            <div id="api-status" class="text-green-500 font-mono">Проверка...</div>
+        </div>
+
+        <button onclick="sendData()" class="w-full bg-orange-600 text-white font-bold py-3 rounded-lg active:scale-95 transition-transform">
+            Сообщить боту, что я зашел
+        </button>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Развернуть на весь экран
+
+        // Пример получения данных из API
+        fetch('https://api.opendota.com/api/health')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('api-status').innerText = "Подключено (OK)";
+            });
+
+        function sendData() {
+            // Отправляет данные обратно боту и закрывает приложение
+            tg.sendData("Пользователь открыл помощника");
+        }
+    </script>
+</body>
+</html>
