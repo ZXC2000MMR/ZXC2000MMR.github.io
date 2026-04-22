@@ -22,10 +22,10 @@
     <div id="page-home" class="page p-4 active">
         <h1 class="text-2xl font-bold text-orange-500 mb-4 uppercase italic">Главная</h1>
         <div class="flex gap-2 mb-4">
-            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm transition-all">Новости</button>
-            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38] transition-all">Патч</button>
+            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Новости</button>
+            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Патч</button>
         </div>
-        <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] shadow-lg">
+        <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
             <div id="home-news-content"></div>
             <div id="home-patch-content" class="hidden"></div>
         </div>
@@ -38,7 +38,7 @@
                 <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png" class="w-14 h-14 rounded-lg border border-orange-500 shadow-lg shadow-orange-500/10">
                 <div>
                     <div class="font-bold text-lg text-white">Lion</div>
-                    <div class="text-xs text-orange-400 font-bold">СМОТРЕТЬ БИЛД</div>
+                    <div class="text-xs text-orange-400 font-bold uppercase">Смотреть билд</div>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
 
     <div id="page-hero-details" class="page">
         <div class="p-4">
-            <button onclick="showPage('heroes', document.getElementById('nav-heroes'))" class="text-orange-500 font-bold mb-4 flex items-center gap-2">← НАЗАД</button>
+            <button onclick="showPage('heroes', document.getElementById('nav-heroes'))" class="text-orange-500 font-bold mb-4">← НАЗАД</button>
             <div class="flex items-center gap-4 mb-6">
                 <img id="h-img" src="" class="w-20 h-20 rounded-xl border-2 border-orange-500 shadow-xl shadow-orange-500/20">
                 <h1 id="h-name" class="text-3xl font-black italic uppercase tracking-tighter"></h1>
@@ -65,12 +65,12 @@
                     <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-4 border-[#1a1c24] rounded-full"></div>
                 </div>
                 <div>
-                    <p id="user-name" class="font-black text-2xl text-white italic leading-none mb-1">Загрузка...</p>
+                    <p id="user-name" class="font-black text-2xl text-white italic leading-none mb-1">...</p>
                     <p class="text-[10px] text-orange-500 font-bold tracking-widest uppercase">PRO PLAYER</p>
                 </div>
             </div>
         </div>
-        <button onclick="tg.close()" class="w-full bg-[#2a2e38] text-red-500 py-4 rounded-xl font-bold border border-[#3a3e48] active:scale-95 transition-all">ВЫЙТИ</button>
+        <button onclick="tg.close()" class="w-full bg-[#2a2e38] text-red-500 py-4 rounded-xl font-bold border border-[#3a3e48]">ВЫЙТИ</button>
     </div>
 
     <div class="fixed bottom-0 left-0 right-0 h-[75px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center z-[100] pb-[env(safe-area-inset-bottom)]">
@@ -129,7 +129,7 @@
             `).join('');
 
             const renderItems = (items) => items.map(i => `
-                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] min-w-[80px] flex flex-col items-center shadow-md">
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] min-w-[85px] flex flex-col items-center shadow-md">
                     <img src="${i.img}" class="w-10 h-8 rounded border border-gray-800 mb-1">
                     <span class="text-[8px] text-gray-400 text-center uppercase font-bold">${i.name}</span>
                 </div>
@@ -137,9 +137,9 @@
 
             document.getElementById('h-items-content').innerHTML = `
                 <h3 class="text-orange-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Стартовый закуп</h3>
-                <div class="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-hide">${renderItems(h.starting_items)}</div>
+                <div class="flex gap-2 overflow-x-auto pb-4 mb-4">${renderItems(h.starting_items)}</div>
                 <h3 class="text-blue-400 text-[10px] uppercase font-bold mb-3 tracking-widest">Основные предметы</h3>
-                <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">${renderItems(h.mid_items)}</div>
+                <div class="flex gap-2 overflow-x-auto pb-2">${renderItems(h.mid_items)}</div>
             `;
             showPage('hero-details');
         }

@@ -15,12 +15,14 @@
         { "name": "Sentry", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ward_sentry.png" },
         { "name": "Observer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ward_observer.png" },
         { "name": "Grenade", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blood_grenade.png" },
-        { "name": "Stick", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/magic_stick.png" }
+        { "name": "Stick", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/magic_stick.png" },
+        { "name": "Tranquil", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tranquil_boots.png" }
       ],
       "mid_items": [
         { "name": "Dagon", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/dagon_5.png" },
         { "name": "Ethereal", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ethereal_blade.png" },
-        { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" }
+        { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" },
+        { "name": "Glimmer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/glimmer_cape.png" }
       ]
     }
   }
