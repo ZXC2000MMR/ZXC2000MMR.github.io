@@ -1,29 +1,26 @@
 {
-  "news": "<b>🏆 События турнира PGL Wallachia Season 8</b><br><br>Team Spirit выбила NAVI из турнира.<br>Team Liquid успешно прошла в плей-офф.<br>Team Yandex проявила себя как фаворит.<br>Virtus.pro проиграла Heroic и выбыла.<br>Tundra Esports уступила MOUZ и выбыла.<br>Aurora и BetBoom Team вышли в плей-офф.<br><br><b>📊 Таблица (W - L):</b><br>Yandex: 0 - 3<br>Tundra: 0 - 3<br>PAR: 3 - 1<br>Spirit: 2 - 2<br>Xtreme: 2 - 2<br>Liquid: 3 - 1<br>BB: 3 - 0<br>Aurora: 3 - 0<br>Falcons: 3 - 1<br>HEROIC: 2 - 2<br>MOUZ: 2 - 2<br>Vici: 1 - 3<br>Natus Vincere: 1 - 3<br>Legion: 2 - 2<br>Virtus.pro: 1 - 3<br>South America Rejects: 2 - 2",
-  "patch": "<b>🛠 Патч версия 7.41b</b><br><br><b>🚫 Удаление Граней:</b><br>Из игры полностью убрали механику «Граней».<br><br><b>🗺 Карта и цели:</b><br>Значительные изменения ландшафта и ключевых целей на карте.<br><br><b>⚔️ Новая экипировка:</b><br>• Добавлены: Shawl, Splintmail, Wizard Hat.<br>• Нейтральные: Forgager's Kit, Dagger of Ristul.<br>• Удалены: Whisper of the Dread.<br><br><b>🔄 Переработка предметов:</b><br>Полностью переработана механика Shivas Guard и Bloodstone.",
+  "news": "<b>🏆 События турнира PGL Wallachia Season 8</b><br><br>Team Spirit выбила NAVI из турнира.<br>Team Liquid успешно прошла в плей-офф.<br>Team Yandex проявила себя как фаворит.<br>Virtus.pro проиграла Heroic и выбыла.<br>Tundra Esports уступила MOUZ и выбыла.<br>Aurora и BetBoom Team вышли в плей-офф.",
+  "patch": "<b>🛠 Патч версия 7.41b</b><br><br>Из игры полностью убрали механику «Граней». Значительные изменения ландшафта и ключевых целей на карте.",
   "heroes_data": {
     "lion": {
       "name": "Lion",
       "image": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png",
       "talents": [
         { "lvl": "25", "left": "+600 к дальности Earth Spike", "right": "Hex по области" },
-        { "lvl": "20", "left": "Earth Spike в конусе 30°", "right": "+20 к урону Finger of Death" },
-        { "lvl": "15", "left": "+15% к эффектам предметов", "right": "-2.5 сек. перезарядки Hex" },
-        { "lvl": "10", "left": "+20 к скорости передвиж.", "right": "+10% к замедл. Mana Drain" }
+        { "lvl": "20", "left": "Earth Spike в 30-градусном конусе", "right": "+20 к урону за убийство Finger of Death" },
+        { "lvl": "15", "left": "+15% к эффектам способностей", "right": "-2.5 сек. перезарядки Hex" },
+        { "lvl": "10", "left": "+20 к скорости передвижения", "right": "+10% к замедлению от Mana Drain" }
       ],
       "starting_items": [
         { "name": "Sentry", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ward_sentry.png" },
         { "name": "Observer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ward_observer.png" },
         { "name": "Grenade", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blood_grenade.png" },
-        { "name": "Stick", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/magic_stick.png" },
-        { "name": "Tranquil", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/tranquil_boots.png" }
+        { "name": "Stick", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/magic_stick.png" }
       ],
       "mid_items": [
-        { "name": "Dagon 5", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/dagon_5.png" },
+        { "name": "Dagon", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/dagon_5.png" },
         { "name": "Ethereal", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ethereal_blade.png" },
-        { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" },
-        { "name": "Glimmer", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/glimmer_cape.png" },
-        { "name": "Aghanim", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ultimate_scepter.png" }
+        { "name": "Blink", "img": "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png" }
       ]
     }
   }

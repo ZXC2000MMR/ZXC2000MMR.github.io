@@ -7,44 +7,38 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-        body { font-family: 'Roboto', sans-serif; background-color: #131418; color: #fff; margin: 0; overflow: hidden; }
-        .page { display: none; height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 30px; }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; background-color: #131418; color: #fff; margin: 0; overflow: hidden; position: fixed; width: 100%; }
+        .page { display: none; height: calc(100vh - 75px); overflow-y: auto; padding-bottom: 30px; }
         .page.active { display: block; }
-        .nav-item.active { color: #fff; }
-        .hidden { display: none; }
         
         .talent-row { display: flex; align-items: center; justify-content: space-between; padding: 12px; gap: 10px; border-bottom: 1px solid #2a2e38; }
-        .talent-lvl { 
-            flex: none; width: 36px; height: 36px; border-radius: 50%; border: 2px solid #4a4e58;
-            display: flex; align-items: center; justify-content: center; 
-            background: #1a1c24; color: #f97316; font-weight: 900; font-size: 14px;
-        }
+        .talent-lvl { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 2px solid #4a4e58; display: flex; align-items: center; justify-content: center; background: #1a1c24; color: #f97316; font-weight: 900; font-size: 14px; }
         .talent-text { width: 42%; font-size: 11px; line-height: 1.2; }
     </style>
 </head>
 <body>
 
     <div id="page-home" class="page p-4 active">
-        <h1 class="text-2xl font-bold text-orange-500 mb-4">Главная</h1>
+        <h1 class="text-2xl font-bold text-orange-500 mb-4 uppercase italic">Главная</h1>
         <div class="flex gap-2 mb-4">
-            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm">Новости</button>
-            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38]">Патч</button>
+            <button id="btn-home-news" onclick="switchHomeTab('news')" class="w-1/2 bg-[#2a2e38] text-white font-bold py-2.5 rounded-lg text-sm transition-all">Новости</button>
+            <button id="btn-home-patch" onclick="switchHomeTab('patch')" class="w-1/2 bg-transparent text-gray-400 py-2.5 rounded-lg text-sm border border-[#2a2e38] transition-all">Патч</button>
         </div>
-        <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38]">
+        <div class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] shadow-lg">
             <div id="home-news-content"></div>
             <div id="home-patch-content" class="hidden"></div>
         </div>
     </div>
 
     <div id="page-heroes" class="page p-4">
-        <h1 class="text-2xl font-bold mb-4">Герои</h1>
+        <h1 class="text-2xl font-bold mb-4 uppercase italic">Герои</h1>
         <div id="heroes-list" class="space-y-3">
-            <div onclick="openHeroDetails('lion')" class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] flex items-center gap-4 active:scale-95 transition-all">
-                <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png" class="w-12 h-12 rounded-lg border border-orange-500">
+            <div onclick="openHeroDetails('lion')" class="bg-[#1a1c24] p-4 rounded-xl border border-[#2a2e38] flex items-center gap-4 active:scale-95 transition-all cursor-pointer">
+                <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png" class="w-14 h-14 rounded-lg border border-orange-500 shadow-lg shadow-orange-500/10">
                 <div>
                     <div class="font-bold text-lg text-white">Lion</div>
-                    <div class="text-xs text-orange-400">Смотреть билд</div>
+                    <div class="text-xs text-orange-400 font-bold">СМОТРЕТЬ БИЛД</div>
                 </div>
             </div>
         </div>
@@ -52,36 +46,43 @@
 
     <div id="page-hero-details" class="page">
         <div class="p-4">
-            <button onclick="showPage('heroes', document.getElementById('nav-heroes'))" class="text-orange-500 font-bold mb-4">← Назад</button>
+            <button onclick="showPage('heroes', document.getElementById('nav-heroes'))" class="text-orange-500 font-bold mb-4 flex items-center gap-2">← НАЗАД</button>
             <div class="flex items-center gap-4 mb-6">
-                <img id="h-img" src="" class="w-20 h-20 rounded-xl border-2 border-orange-500">
-                <h1 id="h-name" class="text-3xl font-black italic uppercase"></h1>
+                <img id="h-img" src="" class="w-20 h-20 rounded-xl border-2 border-orange-500 shadow-xl shadow-orange-500/20">
+                <h1 id="h-name" class="text-3xl font-black italic uppercase tracking-tighter"></h1>
             </div>
             <h3 class="text-gray-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Таланты</h3>
-            <div id="h-talents" class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] overflow-hidden mb-6"></div>
+            <div id="h-talents" class="bg-[#1a1c24] rounded-xl border border-[#2a2e38] overflow-hidden mb-6 shadow-lg"></div>
             <div id="h-items-content"></div>
         </div>
     </div>
 
-   <div id="page-profile" class="page p-4">
-        <div class="relative p-[2px] rounded-2xl bg-gradient-to-r from-orange-500 via-red-500 to-purple-600">
+    <div id="page-profile" class="page p-4">
+        <div class="relative p-[2px] rounded-2xl bg-gradient-to-r from-orange-500 via-red-500 to-purple-600 shadow-xl mb-6">
             <div class="bg-[#1a1c24] p-6 rounded-2xl flex items-center gap-5">
                 <div class="relative">
-                    <img id="user-photo" src="https://i.ibb.co/vz6m6mS/default-avatar.png" 
-                         class="w-20 h-20 rounded-full border-2 border-[#2a2e38] object-cover shadow-lg shadow-orange-500/20">
+                    <img id="user-photo" src="https://i.ibb.co/vz6m6mS/default-avatar.png" class="w-20 h-20 rounded-full border-2 border-[#2a2e38] object-cover">
                     <div class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-4 border-[#1a1c24] rounded-full"></div>
                 </div>
-                
-                <div class="flex flex-col justify-center">
+                <div>
                     <p id="user-name" class="font-black text-2xl text-white italic leading-none mb-1">Загрузка...</p>
-                    <p id="user-status" class="text-xs text-orange-500 font-bold tracking-widest uppercase opacity-80">PRO PLAYER</p>
+                    <p class="text-[10px] text-orange-500 font-bold tracking-widest uppercase">PRO PLAYER</p>
                 </div>
             </div>
         </div>
+        <button onclick="tg.close()" class="w-full bg-[#2a2e38] text-red-500 py-4 rounded-xl font-bold border border-[#3a3e48] active:scale-95 transition-all">ВЫЙТИ</button>
+    </div>
 
-        <button onclick="tg.close()" class="mt-6 w-full bg-[#2a2e38] hover:bg-red-900/20 text-gray-400 hover:text-red-500 py-4 rounded-xl font-bold transition-all border border-[#3a3e48]">
-            Выйти из приложения
-        </button>
+    <div class="fixed bottom-0 left-0 right-0 h-[75px] bg-[#1a1c24] border-t border-[#2a2e38] flex justify-around items-center z-[100] pb-[env(safe-area-inset-bottom)]">
+        <div onclick="showPage('home', this)" class="nav-item active flex flex-col items-center gap-1 text-[10px] text-white cursor-pointer transition-all">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>ГЛАВНАЯ</span>
+        </div>
+        <div id="nav-heroes" onclick="showPage('heroes', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px] cursor-pointer transition-all">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span>ГЕРОИ</span>
+        </div>
+        <div onclick="showPage('profile', this)" class="nav-item flex flex-col items-center gap-1 text-gray-500 text-[10px] cursor-pointer transition-all">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg><span>ПРОФИЛЬ</span>
+        </div>
     </div>
 
     <script>
@@ -91,19 +92,18 @@
 
         async function init() {
             try {
-                // Добавляем ?v= для сброса кэша при каждом запуске
                 const res = await fetch('data.json?v=' + Date.now());
                 db = await res.json();
-                document.getElementById('home-news-content').innerHTML = `<p class="text-gray-300 text-sm">${db.news}</p>`;
-                document.getElementById('home-patch-content').innerHTML = `<p class="text-gray-300 text-sm">${db.patch}</p>`;
-            } catch (e) { console.error("Ошибка загрузки БД"); }
+                document.getElementById('home-news-content').innerHTML = `<p class="text-gray-300 text-sm leading-relaxed">${db.news}</p>`;
+                document.getElementById('home-patch-content').innerHTML = `<p class="text-gray-300 text-sm leading-relaxed">${db.patch}</p>`;
+            } catch (e) { console.error("Ошибка БД"); }
 
-            // ОТОБРАЖЕНИЕ НИКА
             const user = tg.initDataUnsafe?.user;
             if (user) {
-                document.getElementById('user-name').innerText = user.first_name || user.username;
+                document.getElementById('user-name').innerText = user.first_name || user.username || "Player";
+                if (user.photo_url) document.getElementById('user-photo').src = user.photo_url;
             } else {
-                document.getElementById('user-name').innerText = "Игрок Dota 2";
+                document.getElementById('user-name').innerText = "Пользователь";
             }
         }
 
@@ -122,40 +122,34 @@
             document.getElementById('h-img').src = h.image;
             document.getElementById('h-talents').innerHTML = h.talents.map(t => `
                 <div class="talent-row">
-                    <div class="talent-text text-[#5f80cc] text-left">${t.left}</div>
+                    <div class="talent-text text-[#5f80cc] text-left font-bold">${t.left}</div>
                     <div class="talent-lvl">${t.lvl}</div>
                     <div class="talent-text text-gray-400 text-right">${t.right}</div>
                 </div>
             `).join('');
 
             const renderItems = (items) => items.map(i => `
-                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] min-w-[75px] flex flex-col items-center">
-                    <img src="${i.img}" class="w-10 h-8 rounded border border-gray-800">
-                    <span class="text-[9px] mt-1 text-gray-400 text-center">${i.name}</span>
+                <div class="bg-[#1a1c24] p-2 rounded-lg border border-[#2a2e38] min-w-[80px] flex flex-col items-center shadow-md">
+                    <img src="${i.img}" class="w-10 h-8 rounded border border-gray-800 mb-1">
+                    <span class="text-[8px] text-gray-400 text-center uppercase font-bold">${i.name}</span>
                 </div>
             `).join('');
 
             document.getElementById('h-items-content').innerHTML = `
                 <h3 class="text-orange-500 text-[10px] uppercase font-bold mb-3 tracking-widest">Стартовый закуп</h3>
-                <div class="flex gap-2 overflow-x-auto pb-4 mb-4">${renderItems(h.starting_items)}</div>
-                <h3 class="text-blue-400 text-[10px] uppercase font-bold mb-3 tracking-widest">Лейнинг / Основные</h3>
-                <div class="flex gap-2 overflow-x-auto pb-2">${renderItems(h.mid_items)}</div>
+                <div class="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-hide">${renderItems(h.starting_items)}</div>
+                <h3 class="text-blue-400 text-[10px] uppercase font-bold mb-3 tracking-widest">Основные предметы</h3>
+                <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">${renderItems(h.mid_items)}</div>
             `;
-
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-hero-details').classList.add('active');
+            showPage('hero-details');
         }
 
         function showPage(id, el) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + id).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => {
-                i.classList.remove('text-white');
-                i.classList.add('text-gray-500');
-            });
             if (el) {
-                el.classList.remove('text-gray-500');
-                el.classList.add('text-white');
+                document.querySelectorAll('.nav-item').forEach(i => { i.classList.remove('text-white'); i.classList.add('text-gray-500'); });
+                el.classList.add('text-white'); el.classList.remove('text-gray-500');
             }
             tg.HapticFeedback.impactOccurred('light');
         }
